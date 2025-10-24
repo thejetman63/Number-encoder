@@ -67,9 +67,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 10px;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         
         /* Subtle animated background gradient */
@@ -108,9 +108,199 @@
                 0 0 60px rgba(0, 153, 255, 0.15);
             max-width: 650px;
             width: 100%;
-            padding: 50px;
+            padding: 30px 20px;
             position: relative;
             backdrop-filter: blur(20px);
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 50px;
+            }
+        }
+        
+        /* Responsive breakpoints */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 25px;
+                border-radius: 20px;
+                max-width: 95%;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .subtitle {
+                font-size: 11px;
+                letter-spacing: 2px;
+            }
+            
+            .mode-btn {
+                font-size: 13px;
+                padding: 14px;
+            }
+            
+            input[type="text"] {
+                font-size: 16px;
+                padding: 16px 18px;
+            }
+            
+            .process-btn {
+                font-size: 15px;
+                padding: 18px;
+            }
+            
+            .logout-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 25px 20px;
+                border-radius: 16px;
+            }
+            
+            h1 {
+                font-size: 24px;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+            }
+            
+            .subtitle {
+                font-size: 10px;
+                letter-spacing: 1.5px;
+                margin-bottom: 30px;
+            }
+            
+            .mode-switcher {
+                gap: 10px;
+                padding: 6px;
+            }
+            
+            .mode-btn {
+                font-size: 12px;
+                padding: 12px;
+                letter-spacing: 0.5px;
+            }
+            
+            label {
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+            
+            input[type="text"] {
+                font-size: 16px; /* Keep at 16px to prevent zoom on iOS */
+                padding: 14px 16px;
+                letter-spacing: 1px;
+            }
+            
+            .process-btn {
+                font-size: 14px;
+                padding: 16px;
+                letter-spacing: 1.5px;
+            }
+            
+            .result {
+                padding: 20px;
+            }
+            
+            .result-label {
+                font-size: 11px;
+            }
+            
+            .result-code {
+                font-size: 16px;
+                padding: 14px;
+                letter-spacing: 1px;
+            }
+            
+            .copy-btn {
+                font-size: 12px;
+                padding: 10px 20px;
+                margin-top: 12px;
+            }
+            
+            .logout-btn {
+                padding: 6px 12px;
+                font-size: 10px;
+                top: 8px;
+                right: 8px;
+            }
+            
+            .error {
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .mode-btn {
+                font-size: 11px;
+                padding: 10px;
+            }
+            
+            input[type="text"] {
+                font-size: 16px;
+                padding: 12px 14px;
+            }
+            
+            .process-btn {
+                font-size: 13px;
+                padding: 14px;
+            }
+            
+            .result-code {
+                font-size: 14px;
+            }
+        }
+        
+        /* Landscape mode adjustments */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+                max-width: 90%;
+            }
+            
+            h1 {
+                font-size: 22px;
+                margin-bottom: 8px;
+            }
+            
+            .subtitle {
+                margin-bottom: 20px;
+            }
+            
+            .mode-switcher {
+                margin-bottom: 20px;
+            }
+            
+            .input-group {
+                margin-bottom: 15px;
+            }
+            
+            label {
+                margin-bottom: 6px;
+            }
         }
         
         /* Metallic edge highlight */
@@ -861,6 +1051,71 @@
             position: relative;
         }
         
+        /* Responsive PIN screen */
+        @media (max-width: 768px) {
+            .pin-container {
+                padding: 40px 30px;
+                max-width: 90%;
+            }
+            
+            .pin-container h2 {
+                font-size: 24px;
+            }
+            
+            #pinInput {
+                max-width: 260px;
+                padding: 18px;
+                font-size: 28px;
+                letter-spacing: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .pin-container {
+                padding: 30px 20px;
+                max-width: 95%;
+                border-radius: 20px;
+            }
+            
+            .pin-container h2 {
+                font-size: 22px;
+                letter-spacing: 1px;
+            }
+            
+            .pin-container .subtitle {
+                font-size: 10px;
+                margin-bottom: 30px;
+            }
+            
+            #pinInput {
+                max-width: 240px;
+                padding: 16px;
+                font-size: 24px;
+                letter-spacing: 8px;
+            }
+            
+            .pin-error {
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .pin-container {
+                padding: 25px 15px;
+            }
+            
+            .pin-container h2 {
+                font-size: 20px;
+            }
+            
+            #pinInput {
+                max-width: 220px;
+                padding: 14px;
+                font-size: 22px;
+                letter-spacing: 6px;
+            }
+        }
+        
         .pin-container::before {
             content: '';
             position: absolute;
@@ -1073,6 +1328,167 @@
                 inset 0 4px 12px rgba(0, 0, 0, 0.6),
                 inset 0 1px 0 rgba(0, 0, 0, 0.8),
                 0 0 20px rgba(0, 153, 255, 0.4);
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 24px;
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+            }
+            
+            .subtitle {
+                font-size: 10px;
+                letter-spacing: 1.5px;
+                margin-bottom: 25px;
+            }
+            
+            .logout-btn {
+                top: 10px;
+                right: 10px;
+                padding: 8px 16px;
+                font-size: 10px;
+            }
+            
+            .mode-switcher {
+                gap: 10px;
+                margin-bottom: 25px;
+                padding: 6px;
+            }
+            
+            .mode-btn {
+                padding: 12px;
+                font-size: 13px;
+            }
+            
+            input[type="text"], #pinInput {
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+            
+            #pinInput {
+                font-size: 24px;
+                letter-spacing: 8px;
+                max-width: 240px;
+            }
+            
+            .process-btn {
+                padding: 16px;
+                font-size: 15px;
+            }
+            
+            .result {
+                padding: 20px;
+                margin-top: 20px;
+            }
+            
+            .result-code {
+                font-size: 16px;
+                padding: 14px;
+            }
+            
+            .copy-btn {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+            
+            .pin-container {
+                padding: 30px 20px;
+            }
+            
+            .pin-container h2 {
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                border-radius: 16px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .subtitle {
+                font-size: 9px;
+            }
+            
+            .logout-btn {
+                padding: 6px 12px;
+                font-size: 9px;
+                top: 8px;
+                right: 8px;
+            }
+            
+            .mode-btn {
+                padding: 10px;
+                font-size: 12px;
+            }
+            
+            input[type="text"] {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            #pinInput {
+                font-size: 20px;
+                letter-spacing: 6px;
+                max-width: 200px;
+                padding: 16px;
+            }
+            
+            .process-btn {
+                padding: 14px;
+                font-size: 14px;
+            }
+            
+            .result-code {
+                font-size: 14px;
+            }
+            
+            .pin-container {
+                padding: 25px 15px;
+            }
+            
+            .pin-container h2 {
+                font-size: 20px;
+            }
+        }
+        
+        /* Landscape mobile optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .container, .pin-container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+            
+            .subtitle {
+                margin-bottom: 15px;
+            }
+            
+            .mode-switcher {
+                margin-bottom: 15px;
+            }
+            
+            .input-group {
+                margin-bottom: 15px;
+            }
+            
+            .result {
+                margin-top: 15px;
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -1365,23 +1781,31 @@
             if (!installButton && deferredPrompt) {
                 installButton = document.createElement('button');
                 installButton.textContent = '📱 Install App';
-                installButton.style.cssText = `
+                installButton.className = 'pwa-install-button';
+                
+                // Add responsive inline styles
+                const isMobile = window.innerWidth <= 480;
+                const isTablet = window.innerWidth <= 768 && window.innerWidth > 480;
+                
+                let buttonStyles = `
                     position: fixed;
-                    bottom: 20px;
-                    right: 20px;
-                    padding: 12px 24px;
+                    bottom: ${isMobile ? '10px' : '20px'};
+                    right: ${isMobile ? '10px' : '20px'};
+                    padding: ${isMobile ? '8px 16px' : isTablet ? '10px 20px' : '12px 24px'};
                     background: linear-gradient(145deg, rgba(0, 153, 255, 0.6), rgba(0, 120, 200, 0.8));
                     border: 1px solid rgba(0, 153, 255, 0.6);
-                    border-radius: 12px;
+                    border-radius: ${isMobile ? '10px' : '12px'};
                     color: white;
                     font-family: 'Orbitron', monospace;
-                    font-size: 14px;
+                    font-size: ${isMobile ? '11px' : isTablet ? '12px' : '14px'};
                     font-weight: 700;
                     cursor: pointer;
                     box-shadow: 0 4px 15px rgba(0, 153, 255, 0.4);
                     z-index: 10000;
                     animation: pulse 2s infinite;
                 `;
+                
+                installButton.style.cssText = buttonStyles;
                 
                 installButton.addEventListener('click', async () => {
                     if (!deferredPrompt) return;
