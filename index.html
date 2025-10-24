@@ -135,8 +135,9 @@
                 0 0 60px rgba(0, 153, 255, 0.15);
             width: 96vw;
             max-width: 650px;
+            height: 96vh;
             max-height: 96vh;
-            padding: 3vh 4vw;
+            padding: 1.5vh 3vw;
             position: relative;
             backdrop-filter: blur(20px);
             display: flex;
@@ -148,7 +149,7 @@
         @media (min-width: 768px) {
             .container {
                 width: 90vw;
-                padding: 4vh 5vw;
+                padding: 2vh 4vw;
             }
         }
         
@@ -360,10 +361,10 @@
         
         h1 {
             color: #e8f0ff;
-            font-size: clamp(24px, 5vw, 36px);
+            font-size: clamp(20px, 4.5vw, 32px);
             font-weight: 900;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 0.5vh;
             text-shadow: 
                 0 0 20px rgba(0, 153, 255, 0.6),
                 0 2px 4px rgba(0, 0, 0, 0.8);
@@ -429,8 +430,8 @@
         .subtitle {
             text-align: center;
             color: rgba(0, 153, 255, 0.7);
-            font-size: 13px;
-            margin-bottom: 40px;
+            font-size: clamp(10px, 2vw, 13px);
+            margin-bottom: 1.5vh;
             text-transform: uppercase;
             letter-spacing: 3px;
             font-weight: 400;
@@ -439,7 +440,7 @@
         .mode-switcher {
             display: flex;
             gap: 15px;
-            margin-bottom: 35px;
+            margin-bottom: 1.5vh;
             background: 
                 linear-gradient(145deg, 
                     rgba(10, 15, 25, 0.8) 0%, 
@@ -548,14 +549,14 @@
         }
         
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 1.5vh;
         }
         
         label {
             display: block;
             color: rgba(255, 255, 255, 0.7);
-            font-size: 13px;
-            margin-bottom: 10px;
+            font-size: clamp(11px, 2vw, 13px);
+            margin-bottom: 0.8vh;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
@@ -1552,14 +1553,14 @@
         .keypad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
             max-width: 300px;
-            margin: 20px auto 0;
+            margin: 1vh auto 0;
         }
         
         .keypad-btn {
             aspect-ratio: 1;
-            min-height: 60px;
+            min-height: 50px;
             background: 
                 repeating-linear-gradient(
                     45deg,
@@ -1578,7 +1579,6 @@
             font-size: clamp(20px, 4vw, 28px);
             font-weight: 900;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'Orbitron', monospace;
             box-shadow: 
                 0 4px 12px rgba(0, 153, 255, 0.3),
@@ -1589,47 +1589,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        .keypad-btn:hover {
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    rgba(255, 255, 255, 0.05) 0px,
-                    rgba(255, 255, 255, 0.05) 1px,
-                    transparent 1px,
-                    transparent 2px
-                ),
-                linear-gradient(145deg, 
-                    rgba(0, 173, 255, 0.4) 0%, 
-                    rgba(0, 140, 230, 0.5) 100%);
-            transform: translateY(-2px);
-            box-shadow: 
-                0 6px 18px rgba(0, 153, 255, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.25),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            touch-action: manipulation;
         }
         
         .keypad-btn:active {
-            transform: translateY(0);
-            box-shadow: 
-                inset 0 4px 12px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(0, 0, 0, 0.8);
             background: 
                 linear-gradient(145deg, 
-                    rgba(0, 120, 200, 0.6) 0%, 
-                    rgba(0, 100, 180, 0.7) 100%);
+                    rgba(0, 173, 255, 0.5) 0%, 
+                    rgba(0, 140, 230, 0.6) 100%);
+            box-shadow: 
+                inset 0 2px 8px rgba(0, 0, 0, 0.5);
         }
         
         .keypad-btn.backspace {
             background: 
-                repeating-linear-gradient(
-                    45deg,
-                    rgba(255, 255, 255, 0.02) 0px,
-                    rgba(255, 255, 255, 0.02) 1px,
-                    transparent 1px,
-                    transparent 2px
-                ),
                 linear-gradient(145deg, 
                     rgba(255, 70, 70, 0.3) 0%, 
                     rgba(200, 50, 50, 0.4) 100%);
@@ -1637,11 +1610,11 @@
             font-size: clamp(18px, 3.5vw, 24px);
         }
         
-        .keypad-btn.backspace:hover {
+        .keypad-btn.backspace:active {
             background: 
                 linear-gradient(145deg, 
-                    rgba(255, 90, 90, 0.4) 0%, 
-                    rgba(220, 70, 70, 0.5) 100%);
+                    rgba(255, 90, 90, 0.5) 0%, 
+                    rgba(220, 70, 70, 0.6) 100%);
         }
         
         @media (max-width: 480px) {
