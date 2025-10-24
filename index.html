@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Encoder - Metallic Edition</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Secure number encoding and decoding application with PIN protection">
+    <meta name="theme-color" content="#0099ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Quantum Encoder">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- App Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -567,6 +583,15 @@
             to { left: 100%; }
         }
         
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(0, 153, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(0, 153, 255, 0.8);
+            }
+        }
+        
         .copy-btn {
             margin-top: 15px;
             padding: 12px 24px;
@@ -1122,6 +1147,11 @@
                             mainApp.style.display = 'block';
                             mainApp.classList.add('unlocked');
                             document.getElementById('inputText').focus();
+                            
+                            // Show install button if PWA prompt is available
+                            if (deferredPrompt) {
+                                showInstallButton();
+                            }
                         }, 1500);
                     }, 600);
                     
@@ -1173,19 +1203,23 @@
             const secretKey = 'QUANTUM2024'; // Fixed secret key
             let result = '';
             
+            // Encode each digit
             for (let i = 0; i < number.length; i++) {
                 const digit = parseInt(number[i]);
                 const keyChar = secretKey.charCodeAt(i % secretKey.length);
-                const encoded = (digit + keyChar) % 36;
+                const shift = keyChar % 26; // Use modulo to keep shift reasonable
+                const encoded = (digit + shift) % 36;
                 result += charset[encoded];
             }
             
-            // Add checksum
-            const checksum = number.split('').reduce((sum, d) => sum + parseInt(d), 0) % 36;
-            result += charset[checksum];
+            // Add checksum at positions 16 and 17
+            const checksum = number.split('').reduce((sum, d) => sum + parseInt(d), 0) % 1296;
+            const checksumStr = checksum.toString(36).toUpperCase().padStart(2, '0');
+            result += checksumStr;
             
-            // Pad to 32 characters
-            while (result.length < 32) {
+            // Pad to exactly 32 characters with random characters
+            const remaining = 32 - result.length;
+            for (let i = 0; i < remaining; i++) {
                 result += charset[Math.floor(Math.random() * 36)];
             }
             
@@ -1197,10 +1231,20 @@
             const secretKey = 'QUANTUM2024';
             let result = '';
             
+            // Decode first 16 characters (the actual encoded number)
             for (let i = 0; i < 16; i++) {
-                const charIndex = charset.indexOf(code[i]);
+                const charIndex = charset.indexOf(code[i].toUpperCase());
                 const keyChar = secretKey.charCodeAt(i % secretKey.length);
-                const decoded = (charIndex - keyChar + 36) % 36 % 10;
+                const shift = keyChar % 26;
+                let decoded = (charIndex - shift);
+                
+                // Handle negative wrapping
+                while (decoded < 0) {
+                    decoded += 36;
+                }
+                
+                // Get only the digit (0-9)
+                decoded = decoded % 10;
                 result += decoded;
             }
             
@@ -1285,6 +1329,83 @@
             if (e.key === 'Enter') {
                 process();
             }
+        });
+        
+        // ===== PWA SERVICE WORKER REGISTRATION =====
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registered:', registration);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed:', err);
+                    });
+            });
+        }
+        
+        // ===== PWA INSTALL PROMPT =====
+        let deferredPrompt;
+        let installButton;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            
+            // Show install button only after PIN is entered
+            const mainApp = document.getElementById('mainApp');
+            if (mainApp.style.display !== 'none') {
+                showInstallButton();
+            }
+        });
+        
+        function showInstallButton() {
+            if (!installButton && deferredPrompt) {
+                installButton = document.createElement('button');
+                installButton.textContent = '📱 Install App';
+                installButton.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    padding: 12px 24px;
+                    background: linear-gradient(145deg, rgba(0, 153, 255, 0.6), rgba(0, 120, 200, 0.8));
+                    border: 1px solid rgba(0, 153, 255, 0.6);
+                    border-radius: 12px;
+                    color: white;
+                    font-family: 'Orbitron', monospace;
+                    font-size: 14px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    box-shadow: 0 4px 15px rgba(0, 153, 255, 0.4);
+                    z-index: 10000;
+                    animation: pulse 2s infinite;
+                `;
+                
+                installButton.addEventListener('click', async () => {
+                    if (!deferredPrompt) return;
+                    // Show the install prompt
+                    deferredPrompt.prompt();
+                    // Wait for the user to respond to the prompt
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`User response to the install prompt: ${outcome}`);
+                    // Clear the deferredPrompt
+                    deferredPrompt = null;
+                    // Remove the install button
+                    if (installButton) {
+                        installButton.remove();
+                        installButton = null;
+                    }
+                });
+                
+                document.body.appendChild(installButton);
+            }
+        }
+        
+        // Track app install
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed successfully!');
         });
     </script>
 </body>
