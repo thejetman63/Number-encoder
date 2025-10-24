@@ -1731,17 +1731,17 @@
             
             <!-- On-screen Numeric Keypad -->
             <div class="keypad">
-                <button class="keypad-btn" onclick="addPinDigit('1')">1</button>
-                <button class="keypad-btn" onclick="addPinDigit('2')">2</button>
-                <button class="keypad-btn" onclick="addPinDigit('3')">3</button>
-                <button class="keypad-btn" onclick="addPinDigit('4')">4</button>
-                <button class="keypad-btn" onclick="addPinDigit('5')">5</button>
-                <button class="keypad-btn" onclick="addPinDigit('6')">6</button>
-                <button class="keypad-btn" onclick="addPinDigit('7')">7</button>
-                <button class="keypad-btn" onclick="addPinDigit('8')">8</button>
-                <button class="keypad-btn" onclick="addPinDigit('9')">9</button>
-                <button class="keypad-btn backspace" onclick="backspacePinDigit()">⌫</button>
-                <button class="keypad-btn" onclick="addPinDigit('0')">0</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('1')" onmousedown="addPinDigit('1')">1</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('2')" onmousedown="addPinDigit('2')">2</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('3')" onmousedown="addPinDigit('3')">3</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('4')" onmousedown="addPinDigit('4')">4</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('5')" onmousedown="addPinDigit('5')">5</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('6')" onmousedown="addPinDigit('6')">6</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('7')" onmousedown="addPinDigit('7')">7</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('8')" onmousedown="addPinDigit('8')">8</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('9')" onmousedown="addPinDigit('9')">9</button>
+                <button class="keypad-btn backspace" ontouchstart="backspacePinDigit()" onmousedown="backspacePinDigit()">⌫</button>
+                <button class="keypad-btn" ontouchstart="addPinDigit('0')" onmousedown="addPinDigit('0')">0</button>
                 <button class="keypad-btn" style="visibility: hidden;"></button>
             </div>
             
@@ -1830,7 +1830,7 @@
             if (pinInput.value.length < 6) {
                 pinInput.value += digit;
                 // Trigger the input event to check PIN
-                pinInput.dispatchEvent(new Event('input'));
+                pinInput.dispatchEvent(new Event('input', { bubbles: true }));
             }
         }
         
@@ -1847,7 +1847,6 @@
             if (currentMode === 'encode' && inputText.value.length < 16) {
                 inputText.value += digit;
             } else if (currentMode === 'decode' && inputText.value.length < 32) {
-                // Allow typing any character in decode mode
                 inputText.value += digit;
             }
         }
