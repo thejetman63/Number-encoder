@@ -8,7 +8,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Number Encoder - Metallic Edition</title>
+    <meta name="version" content="2.1.1761347892">
+    <title>Number Encoder v2.1 - Metallic Edition</title>
     
     <!-- PWA Meta Tags -->
     <meta name="description" content="Secure number encoding and decoding application with PIN protection">
@@ -2226,6 +2227,23 @@
         window.addEventListener('appinstalled', () => {
             console.log('PWA was installed successfully!');
         });
+        
+        // Add version indicator
+        const versionDiv = document.createElement('div');
+        versionDiv.style.cssText = `
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            padding: 3px 8px;
+            background: rgba(0, 153, 255, 0.3);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 9px;
+            font-family: monospace;
+            border-radius: 3px;
+            z-index: 999;
+        `;
+        versionDiv.textContent = 'v2.1';
+        document.body.appendChild(versionDiv);
     </script>
 </body>
 </html>
